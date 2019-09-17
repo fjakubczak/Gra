@@ -14,7 +14,7 @@ namespace Proceduralnie
             Console.Clear();
             Console.WriteLine("Aplikacja GRA");
             Console.WriteLine("=============");
-            Licznik = 0;
+            licznik = 0;
             czas = Stopwatch.StartNew();
         }
 
@@ -37,10 +37,11 @@ namespace Proceduralnie
             {
                 Console.Write("Podaj swoją propozycję: ");
                 string napis = Console.ReadLine();
-                if(napis == "koniec")
+                if (napis == "koniec")
                 {
                     throw new ArgumentException("Poddaje się");
                 }
+
                 try
                 {
                     propozycja = int.Parse(napis);
@@ -62,9 +63,7 @@ namespace Proceduralnie
                     Environment.Exit(1);
                 }
             }
-
-            Licznik++;
-
+            licznik++;
             return propozycja;
         }
 
@@ -73,33 +72,28 @@ namespace Proceduralnie
             if (propozycja < wylosowana)
             {
                 Console.WriteLine("Za mało");
-
             }
             else if (propozycja > wylosowana)
             {
                 Console.WriteLine("Za dużo");
-
             }
-
             else
             {
                 Console.WriteLine("Trafiłeś");
                 return true;
-
             }
             return false;
         }
 
-        static void Statystyki( )
+        static void Statystyki()
         {
             czas.Stop();
-            Console.WriteLine("Statystyki gry: ");
-            Console.WriteLine($"czas gry: {czas.Elapsed}");
-            Console.WriteLine($"Liczba ruchów: {Licznik}");
-
+            Console.WriteLine("Statystyki gry:");
+            Console.WriteLine($"- czas gry: {czas.Elapsed}");
+            Console.WriteLine($"- liczba ruchów: {licznik}");
         }
 
-        static int Licznik = 0;
+        static int licznik = 0;
         static Stopwatch czas;
 
         static void Main(string[] args)
@@ -112,25 +106,19 @@ namespace Proceduralnie
                 int y;
                 try
                 {
-
-                
-                y = WczytajPropozycję();
+                    y = WczytajPropozycję();
                 }
-
                 catch (ArgumentException)
                 {
-                    Console.WriteLine("szkoda");
+                    Console.WriteLine("Szkoda, że się poddajesz");
                     return;
-                
                 }
+
                 trafiono = Ocena(x, y);
             }
             while (!trafiono);
             Statystyki();
         }
-
-
-
 
     }
 }
